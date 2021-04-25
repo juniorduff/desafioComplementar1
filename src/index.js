@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-
 const {v4: uuidv4, validate} = require('uuid');
 
 const app = express();
@@ -40,8 +39,8 @@ function checksCreateTodosUserAvailability(request, response, next) {
 function checksTodoExists(request, response, next) {
   const {username} = request.headers;
   const {id} = request.params;
-  const isUuid = request
-
+  const isUuid = validate(id);
+  
   const user = users.find(user => user.username === username);
 
   const isUuidUser = user.todos.find(todoId => todoId.id === id)
